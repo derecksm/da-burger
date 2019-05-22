@@ -24,6 +24,7 @@ module.exports = {
     },
     async addOne(burger) {
         let response = await new Promise((resolve, reject) => {
+            console.log(burger)
             db.query('INSERT INTO burgers SET ?', burger, e => {
                 if (e) reject(e)
                 console.log('Burger Added!')

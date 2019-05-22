@@ -10,6 +10,11 @@ app.use(express.json())
 app.engine('.hbs', require('express-handlebars')({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', '.hbs')
 
+//Could not connect 
+app.get('/', (req, res) => {
+    res.render('index')
+})
+
 require('./routes')(app)
 
 require('./config').connect(_ => { app.listen(3000) })

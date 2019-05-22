@@ -18,23 +18,28 @@ const getBurger = _ => {
         .then(burgers => renderBurgers(burgers))
         .catch(e => console.error(e))
 }
-const deleteBurger = _ => {
-
+const deleteBurger = item_id => {
+fetch(`/burgers/${item_id}`, {
+    method: 'DELETE'
+})
+.then(_=> getBurger())
+.catch(e => console.log(e))
 }
 
 const createBurger = _ => {
     fetch('/burgers', {
         method: 'POST',
         headers: {
-            'Content_Type' : 'application/json'
+            'Content-Type' : 'application/json'
         },
         body: JSON.stringify({
-            burger: document.querySelector('#burgerAdd').value
+            burger_name: document.querySelector('#burgerAdd').value,
+            eaten: false
         })
     })
     .then(_ => {
         getBurger()
-        document.querySelector('#burger').value = ''
+        document.querySelector('#burgerAdd').value = ''
     })
     .catch(e => console.error(e))
 }
@@ -46,7 +51,7 @@ document.querySelector('#addBurger').addEventListener('click', e => {
 
 document.addEventListener('click', e =>{
     if (e.target.className === 'deleteBurger') {
-        deleteBurger()
+        deleteBurger(e.target.dataset.burgerid)
     }
 })
 

@@ -19,6 +19,7 @@ module.exports = app => {
 
     // Add a new burger to the database
     app.post('/burgers', (req, res) => {
+        console.log(req.body)
         burger.addOne(req.body)
             .then(_ => res.sendStatus(200))
             .catch(e => console.log(e))
